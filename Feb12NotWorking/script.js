@@ -28,10 +28,7 @@ searchForm.addEventListener('submit', getRequest); // searchForm is the entire f
 function getRequest(e) { // fetchResults is called from the searchForm - fetchResults is an event handling function. Event handling functions receive an event object. Name the object "e" so we can process it.
     e.preventDefault();  // prevents the page from being refreshed; by default, any form submission will automatically refresh the page
     let songTitleEntered = e.target.elements[0].value;
-    let songTitleForSearch = '"' + songTitleEntered + '"';
-    
     let artistNameEntered = e.target.elements[1].value;
-    let artistNameForSearch = '"' + artistNameEntered + '"'
     // console.log(songTitleEntered);
     // console.log(artistNameEntered);
     // if (songTitleEntered) {
@@ -49,20 +46,20 @@ function getRequest(e) { // fetchResults is called from the searchForm - fetchRe
         if (artistNameEntered) {
             // both the song title and the artist name were provided. send this to html for execution
             
-            let almostURL = songArtistURL.replace("songTitle", songTitleForSearch)
-            url = almostURL.replace("artistName", artistNameForSearch)
+            let almostURL = songArtistURL.replace("songTitle", songTitleEntered)
+            url = almostURL.replace("artistName", artistNameEntered)
             console.log(url);
 
             console.log("both  song", songTitleEntered, "artist", artistNameEntered);
             window.open(url);
         } else {   // only the song title / search pattern
-            url = patternBaseURL+songTitleForSearch;
+            url = patternBaseURL+songTitleEntered;
             fetchTabs(url);
             console.log("only song title provided   song: ", songTitleEntered, "artist: ", artistNameEntered);
         }
     } else if (artistNameEntered) {   // only artist
         console.log("only artist provided   song: ", songTitleEntered, "artist: ", artistNameEntered);
-        url = artistBaseURL+artistNameForSearch;
+        url = artistBaseURL+artistNameEntered;
         fetchTabs(url);
         // const baseURL = 'http://www.songsterr.com/a/ra/songs/byartists.json?artists=Metallica,"Led%20Zeppelin"';
 
